@@ -4,15 +4,13 @@
 This project implements and tests an `average` function in Java. The function calculates the arithmetic mean of the first `k` elements of an array. If `k` exceeds the array length, it computes the average of the entire array. If the array is empty or `k` is 0, it returns 0. The project includes functional tests, partition tests, boundary value tests, and measures code coverage using JUnit and VSCode.
 ---
 
-## Functional Description
+## a. Functional Description
 
 The `average` function calculates the average of the first `k` elements in an array:
 - If `k > array.length`, the average of the entire array is returned.
 - If `k = 0` or the array is empty, it returns `0`.
 
-## Test Cases
-
-### Functional Test Cases
+### b. Functional Test Cases
 | Test Case ID | Input                            | Expected Output | Description                              |
 |--------------|----------------------------------|-----------------|------------------------------------------|
 | TC1          | `k = 3, list = {1, 2, 3, 4, 5}` | `2`             | Average of the first 3 elements.         |
@@ -21,7 +19,7 @@ The `average` function calculates the average of the first `k` elements in an ar
 | TC4          | `k = 5, list = {}`              | `0`             | Empty array.                             |
 | TC5          | `k = 2, list = {-3, 3, 6}`      | `0`             | Average of `{-3, 3}`.                    |
 
-### Partition Test Cases
+### c. Partition Test Cases
 | Partition                          | Input                            | Expected Output | Description                              |
 |------------------------------------|----------------------------------|-----------------|------------------------------------------|
 | No elements to average             | `k = 0, list = {1, 2, 3}`       | `0`             | `k = 0` results in no averaging.         |
@@ -30,7 +28,7 @@ The `average` function calculates the average of the first `k` elements in an ar
 | Empty array                        | `k = 3, list = {}`              | `0`             | Empty list results in 0.                 |
 | Mixed positive and negative values | `k = 3, list = {-3, 3, 9}`      | `3`             | Average of mixed values.                 |
 
-### Boundary Value Test Cases
+### d. Boundary Value Test Cases
 | Test Case ID | Input                            | Expected Output | Description                              |
 |--------------|----------------------------------|-----------------|------------------------------------------|
 | BV1          | `k = 0, list = {}`              | `0`             | No elements in the array or to process.  |
@@ -40,11 +38,11 @@ The `average` function calculates the average of the first `k` elements in an ar
 | BV5          | `k = 3, list = {10, 20, 30}`    | `20`            | Boundary case for average of 3 values.   |
 
 
-###  Implement the average function in a class Average and generate test cases using Junit
+###  e. Implement the average function in a class Average and generate test cases using Junit
 [Link to code](https://github.com/UTDClassroomOrg/HW3-testing-axr210162-cs3354.008)
 
 
-### Compile and Run the Test Cases
+### f. Compile and Run the Test Cases
 
 #### **Initial Results**
 The `average` function was compiled and tested using the provided test cases. No failures or errors were reported.
@@ -126,6 +124,6 @@ public int average(int k, int[] list) {
 | testAverageWithEmptyArray                   | `Passed`|
 | testAverageWithNegativeAndPositiveValues	  | `Passed`|
 
-### **Code Coverage**
+### g. **Code Coverage**
 ![100% Coverage](https://github.com/user-attachments/assets/71322a5d-0c25-4720-a6d6-242d3e27704e)
 
