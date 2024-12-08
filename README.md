@@ -1,19 +1,7 @@
 
 # Average Function Testing
 
-This project implements and tests an `average` function in Java. The function calculates the arithmetic mean of the first `k` elements of an array. If `k` exceeds the array length, it computes the average of the entire array. If the array is empty or `k` is 0, it returns 0. The project includes functional tests, partition tests, boundary value tests, and measures code coverage using JUnit and EclEmma.
-
-## Table of Contents
-1. [Functional Description](#functional-description)
-2. [Test Cases](#test-cases)
-    - [Functional Test Cases](#functional-test-cases)
-    - [Partition Test Cases](#partition-test-cases)
-    - [Boundary Value Test Cases](#boundary-value-test-cases)
-3. [Injected Fault and Fix](#injected-fault-and-fix)
-4. [Code Coverage](#code-coverage)
-5. [Setup and Run Instructions](#setup-and-run-instructions)
-6. [Contributing](#contributing)
-
+This project implements and tests an `average` function in Java. The function calculates the arithmetic mean of the first `k` elements of an array. If `k` exceeds the array length, it computes the average of the entire array. If the array is empty or `k` is 0, it returns 0. The project includes functional tests, partition tests, boundary value tests, and measures code coverage using JUnit and VSCode.
 ---
 
 ## Functional Description
@@ -50,3 +38,94 @@ The `average` function calculates the average of the first `k` elements in an ar
 | BV3          | `k = 3, list = {1, 2, 3}`       | `2`             | Average of exactly `k` elements.         |
 | BV4          | `k = 3, list = {-5, -5, -5}`    | `-5`            | Negative values only.                    |
 | BV5          | `k = 3, list = {10, 20, 30}`    | `20`            | Boundary case for average of 3 values.   |
+
+
+###  Implement the average function in a class Average and generate test cases using Junit
+[Link to code](https://github.com/UTDClassroomOrg/HW3-testing-axr210162-cs3354.008)
+
+
+### Compile and Run the Test Cases
+
+#### **Initial Results**
+The `average` function was compiled and tested using the provided test cases. No failures or errors were reported.
+
+**Original Function:**
+```java
+public int average(int k, int[] list) {
+    int average = 0;
+    int n = Math.min(k, list.length);
+    if (n > 0) {
+        for (int i = 0; i < n; i++) {
+            average += list[i];
+        }
+        average = average / n;
+    }
+    return average;
+}
+```
+| Test Case ID | Status  |
+|--------------|---------|
+| testAverageWithFirstKElements               | `Passed`|
+| testAverageWhenKExceedsArrayLength          | `Passed`|
+| testAverageWhenKIsZero                      | `Passed`|
+| testAverageWithEmptyArray                   | `Passed`|
+| testAverageWithNegativeAndPositiveValues	  | `Passed`|
+
+#### **Fault Injection**
+To verify the robustness of the test cases, a fault was injected into the average function by modifying the initialization of the loop variable from int i = 0 to int i = 1.
+
+```java
+public int average(int k, int[] list) {
+    int average = 0;
+    int n = Math.min(k, list.length);
+    if (n > 0) {
+        for (int i = 1; i < n; i++) { // Fault injected: i = 1
+            average += list[i];
+        }
+        average = average / n;
+    }
+    return average;
+}
+```
+| Test Case ID | Status  |
+|--------------|---------|
+| testAverageWithFirstKElements               | `Fail`|
+| testAverageWhenKExceedsArrayLength          | `Fail`|
+| testAverageWhenKIsZero                      | `Passed`|
+| testAverageWithEmptyArray                   | `Passed`|
+| testAverageWithNegativeAndPositiveValues	  | `Fail`|
+
+#### **Analysis of Failures**
+The fault caused the loop to skip the first element of the array, leading to incorrect averages in all scenarios where at least one element should be included. Specifically:
+
+The loop started at the second element (i = 1) instead of the first (i = 0).
+Test cases requiring the inclusion of the first element (testAverageWithFirstKElements, testAverageWhenKExceedsArrayLength, and testAverageWithNegativeAndPositiveValues) failed.
+
+### **Fix**
+The issue was resolved by reverting the loop initialization to int i = 0.
+
+```java
+public int average(int k, int[] list) {
+    int average = 0;
+    int n = Math.min(k, list.length);
+    if (n > 0) {
+        for (int i = 0; i < n; i++) { // Fixed: i = 0
+            average += list[i];
+        }
+        average = average / n;
+    }
+    return average;
+}
+```
+### **Test Results after Fix**
+| Test Case ID | Status  |
+|--------------|---------|
+| testAverageWithFirstKElements               | `Passed`|
+| testAverageWhenKExceedsArrayLength          | `Passed`|
+| testAverageWhenKIsZero                      | `Passed`|
+| testAverageWithEmptyArray                   | `Passed`|
+| testAverageWithNegativeAndPositiveValues	  | `Passed`|
+
+### **Code Coverage**
+![100% Coverage](https://github.com/user-attachments/assets/71322a5d-0c25-4720-a6d6-242d3e27704e)
+
