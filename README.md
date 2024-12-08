@@ -127,3 +127,6 @@ public int average(int k, int[] list) {
 ### g. **Code Coverage**
 ![100% Coverage](https://github.com/user-attachments/assets/71322a5d-0c25-4720-a6d6-242d3e27704e)
 
+### Sources
+Junit Documentation
+Chapter 20 of Kung book
